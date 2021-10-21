@@ -115,7 +115,9 @@ inline bool isRealTimeClockAvailable(uint16_t timestamp_date)
  */
 inline double timestampToSeconds(uint16_t timestamp_date, uint32_t timestamp_time)
 {
-  return (timestamp_date * 86400.0) + (timestamp_time * 1e-3);
+  const double seconds = (timestamp_date * 86400.0) + (timestamp_time * 1e-3);
+  ROS_INFO_STREAM("Converting timestamp_date `" << timestamp_date <<"` and timestamp_time: `" << timestamp_time << "` to: `" << seconds << "` seconds.");
+  return seconds;
 }
 
 /*!
@@ -127,7 +129,10 @@ inline double timestampToSeconds(uint16_t timestamp_date, uint32_t timestamp_tim
  */
 inline double toSecondsSinceEpoch(double seconds)
 {
-  return seconds + (730u*86400.0);
+  const double two_years = 730u*86400.0;
+  const double adjusted = seconds + two_years;
+  ROS_INFO_STREAM("Adding `" << two_years <<"` to: `" << seconds << "` resulting in: `" << adjusted << "` seconds.");
+  return adjusted;
 }
 
 
